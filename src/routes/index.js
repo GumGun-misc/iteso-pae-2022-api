@@ -1,9 +1,35 @@
-const router = require('express').Router();
 
-const userRoutes = require('./../modules/users/user.routes');
-const channelRoutes = require('./../modules/channel/channel.routes');
+const express = require("express");
+//const controller = require()
 
-router.use('/users', userRoutes);
-router.use('/channels', channelRoutes);
+const router = express.Router();
 
-module.exports = router;
+
+        const usuarioRoutes = require("./../modules/usuario/usuario.router");
+        router.use("/usuario", usuarioRoutes);
+    
+
+        const grupoRoutes = require("./../modules/grupo/grupo.router");
+        router.use("/grupo", grupoRoutes);
+    
+
+        const salaRoutes = require("./../modules/sala/sala.router");
+        router.use("/sala", salaRoutes);
+    
+
+        const mensajeRoutes = require("./../modules/mensaje/mensaje.router");
+        router.use("/mensaje", mensajeRoutes);
+    
+
+        const sesionRoutes = require("./../modules/sesion/sesion.router");
+        router.use("/sesion", sesionRoutes);
+    
+
+        const rolRoutes = require("./../modules/rol/rol.router");
+        router.use("/rol", rolRoutes);
+    
+
+        const usuariogrupoRoutes = require("./../modules/usuariogrupo/usuariogrupo.router");
+        router.use("/usuariogrupo", usuariogrupoRoutes);
+    
+module.exports=router
