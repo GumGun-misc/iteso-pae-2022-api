@@ -1,0 +1,46 @@
+
+/**
+ * @swagger
+ *   /api/users/signUp:
+ *     post:
+ *       tags:
+ *       - Users
+ *       description: SignUp
+ *       parameters:
+ *         - in: body
+ *           name: id
+ *           required: true
+ *           description: The user's unique ID          
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userName
+ *             properties:
+ *               Email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               userName:
+ *                 type: string
+ *               Name:
+ *                 type: string
+ *       responses:
+ *         200:
+ *           description: An object with a single user's data
+ */
+
+/**
+ * @swagger
+ *   definitions:
+ *     User:
+ *       type: object
+ *       required:
+ *         - userName
+ *       properties:
+ *         userName:
+ *           type: string
+ *         firstName:
+ *           type: string
+ *         lastName:
+ *           type: string
+ */
