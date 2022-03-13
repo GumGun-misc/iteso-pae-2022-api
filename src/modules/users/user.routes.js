@@ -1,13 +1,11 @@
 const router = require('express').Router();
 const controller = require('./users.controller');
-var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.get('/', controller.getAll);
-router.post('/signup', jsonParser, controller.create);
-router.get('/getOne/:id', urlencodedParser, controller.getOne);
+router.post('/signup', controller.create);
+router.get('/getOne/:id', controller.getOne);
 router.delete('/:id', controller.delete);
+router.get('/login/:email/:password', controller.login);
 
 module.exports = router;
 /**
@@ -21,38 +19,6 @@ module.exports = router;
  *         200:
  *           description: Array with a list of users
  */
-/**
- * @swagger
- *   /api/users/signUp:
- *     post:
- *       tags:
- *       - Users
- *       description: SignUp
- *       requestBody:
- *         content:
- *           'application/x-www-form-urlencoded':
- *             schema:
- *               name: id
- *               required: true
- *               description: The user's unique ID          
- *               schema:
- *                 type: object
- *                 required:
- *                   - userName
- *                 properties:
- *                   Email:
- *                     type: string
- *                   password:
- *                     type: string
- *                   Name:
- *                     type: string
- *                   userName:
- *                     type: string
- *       responses:
- *         200:
- *           description: An object with a single user's data
- */
-
 /**
  * @swagger
  *   /api/users/getOne/{id}:
@@ -69,7 +35,6 @@ module.exports = router;
  *         200:
  *           description: An object with a single user's data
  */
-
 /**
  * @swagger
  *   /api/users/{id}:
@@ -86,24 +51,26 @@ module.exports = router;
  *         200:
  *           description: An object with a single user's data
  */
-
 /**
  * @swagger
- *   definitions:
- *     User:
- *       type: object
- *       required:
- *         - userName
- *       properties:
- *         userName:
- *           type: string
- *         firstName:
- *           type: string
- *         lastName:
- *           type: string
- */
-
-
+ *   /api/users/login/{email}/{password}:
+ *     get:
+ *       tags:
+ *       - Users
+ *       description: Get one user by ID
+ *       parameters:
+ *         - in: path
+ *           name: email
+ *           required: true
+ *           description: The user's email
+ *         - in: path
+ *           name: password
+ *           required: true
+ *           description: The user's password
+ *       responses:
+ *         200:
+ *           description: An object with a single user's data
+*/
 /**
  * @swagger
  *   /api/users/signUp:
@@ -113,21 +80,21 @@ module.exports = router;
  *       description: SignUp
  *       parameters:
  *         - in: body
- *           name: id
+ *           name: user
  *           required: true
- *           description: The user's unique ID          
+ *           description: new user body         
  *           schema:
  *             type: object
  *             required:
  *               - userName
  *             properties:
- *               Email:
+ *               email:
  *                 type: string
  *               password:
  *                 type: string
  *               userName:
  *                 type: string
- *               Name:
+ *               name:
  *                 type: string
  *       responses:
  *         200:

@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const controller = require('./messages.controller');
 
+router.get('/', controller.getAll);
+router.get('/:id', controller.getOne);
+
 /**
  * @swagger
  *   /api/messages:
@@ -12,7 +15,6 @@ const controller = require('./messages.controller');
  *         200:
  *           description: Array with a list of messages
  */
- router.get('/', controller.getAll);
 
  /**
   * @swagger
@@ -30,6 +32,5 @@ const controller = require('./messages.controller');
   *         200:
   *           description: An object with a single message's data
   */
- router.get('/:id', controller.getOne);
  
  module.exports = router;
