@@ -90,10 +90,48 @@ const ChannelsController = {
             })
     },
     join: (req, res) => {
+        const channel = new Channel();
+        let id;
+        try {
+            id = ObjectID(req.params.id)
+        } catch (error) {
+            res.status(400).json({ error: 1, content: '' });
+            return;
+        }
+        channel.collection.findOne({secKey:req.params.link})
+        .then((result)=>{
+            if(result.owner==req.params.owner){
+                res.status(200).json({error:"", content:result});
+            }else{
+                res.status(500).json({error:"not the owner", content:""});
+            }
+        })
 
     },
     getLink: (req, res) => {
-
+        const channel = new Channel();
+        const user = new User();
+        let id;
+        try {
+            id = ObjectID(req.params.id);
+        } catch (error) {
+            res.status(400).json({ error: 1, content: '' });
+            return;
+        }
+        channel.collection.findOne({secKey:req.params.link})
+        .then((result)=>{
+            console.log(result);
+            user.collection.findOneAndUpdate({ _id: id }, { $push: { salas: result._id } })
+            .then((result)=>{
+                console.log(result);
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+            res.status(200).json({err:"", content:"joined succesfully"});
+        }, (err)=>{
+            console.log(err);
+        })
     }
 }
 

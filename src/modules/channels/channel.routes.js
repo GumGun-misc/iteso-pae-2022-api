@@ -6,6 +6,8 @@ router.get('/', controller.getAll);
 router.get('/getOne/:id', controller.getOne);
 router.post('/create/:id', controller.create);
 router.delete('/:id/:owner', controller.delete);
+router.get('/getLink/:id/:owner', controller.getLink);
+router.get('/join/:id/:link', controller.getLink);
 
 /**
  * @swagger
@@ -37,14 +39,14 @@ router.delete('/:id/:owner', controller.delete);
  *           schema:
  *             type: object
  *             properties:
- *               id:
+ *               name:
  *                 type: string
  *               image:
  *                 type: string
  *       responses:
  *         200:
  *           description: An object with a single user's data
- */
+*/
 /**
  * @swagger
  *   /api/channels/getOne/{id}:
@@ -77,6 +79,46 @@ router.delete('/:id/:owner', controller.delete);
  *           name: owner
  *           required: true
  *           description: group owner token
+ *       responses:
+ *         200:
+ *           description: An object with a single user's data
+ */
+/**
+ * @swagger
+ *   /api/channels/getLink/{id}/{owner}:
+ *     get:
+ *       tags:
+ *       - Channels
+ *       description: Get one user by ID
+ *       parameters:
+ *         - in: path
+ *           name: id
+ *           required: true
+ *           description: The user's unique ID
+ *         - in: path
+ *           name: owner
+ *           required: true
+ *           description: group owner token
+ *       responses:
+ *         200:
+ *           description: An object with a single user's data
+ */
+/**
+ * @swagger
+ *   /api/channels/join/{id}/{link}:
+ *     get:
+ *       tags:
+ *       - Channels
+ *       description: Get one user by ID
+ *       parameters:
+ *         - in: path
+ *           name: id
+ *           required: true
+ *           description: The user's unique ID
+ *         - in: path
+ *           name: link
+ *           required: true
+ *           description: link of the server
  *       responses:
  *         200:
  *           description: An object with a single user's data
